@@ -65,45 +65,68 @@
 
   -->
   <div class="inbox">
-    <div class="item">
+    <div class="item" data-id="0">
       <input type="checkbox">
       <p>This is an inbox layout.</p>
     </div>
-    <div class="item">
+    <div class="item" data-id="1">
       <input type="checkbox">
       <p>Check one item</p>
     </div>
-    <div class="item">
+    <div class="item" data-id="2">
       <input type="checkbox">
       <p>Hold down your Shift key</p>
     </div>
-    <div class="item">
+    <div class="item" data-id="3">
       <input type="checkbox">
       <p>Check a lower item</p>
     </div>
-    <div class="item">
+    <div class="item" data-id="4">
       <input type="checkbox">
       <p>Everything inbetween should also be set to checked</p>
     </div>
-    <div class="item">
+    <div class="item" data-id="5">
       <input type="checkbox">
       <p>Try do it with out any libraries</p>
     </div>
-    <div class="item">
+    <div class="item" data-id="6">
       <input type="checkbox">
       <p>Just regular JavaScript</p>
     </div>
-    <div class="item">
+    <div class="item" data-id="7">
       <input type="checkbox">
       <p>Good Luck!</p>
     </div>
-    <div class="item">
+    <div class="item" data-id="8">
       <input type="checkbox">
       <p>Don't forget to tweet your result!</p>
     </div>
   </div>
 
 <script>
+  const inputs = document.querySelectorAll('input');
+
+  function handleSelect(i) {
+    return function(e) {
+      if (!(e.shiftKey && this.checked) return;
+      let firstChecked = i,
+          lastChecked = i;
+
+      inputs.forEach((input, idx)=> {
+        if (!input.checked) return;
+        firstChecked = idx < firstChecked ? idx : firstChecked;
+        lastChecked = idx > lastChecked ? idx : lastChecked;
+      });
+
+      inputs.forEach((input, idx) => {
+        if (idx > firstChecked && idx < lastChecked) {
+          input.checked = true;
+        }
+      });
+    }
+  }
+
+  inputs.forEach((item, i)=> item.addEventListener('click', handleSelect(i)));
 </script>
 </body>
 </html>
