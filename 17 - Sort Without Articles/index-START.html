@@ -43,7 +43,36 @@
   <ul id="bands"></ul>
 
 <script>
+const list = document.getElementById('bands');
+
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+
+const sorted = bands.sort((a,b) => {
+  let bandA = a.toLowerCase().split(' '),
+      bandB = b.toLowerCase().split(' ');
+
+  while (
+    bandA[0] === "a"
+    || bandA[0] === "an"
+    || bandA[0] === "the"
+  ) {
+    bandA.splice(0,1);
+  }
+
+  while (
+    bandB[0] === "a"
+    || bandB[0] === "an"
+    || bandB[0] === "the"
+  ) {
+    bandB.splice(0,1);
+  }
+
+  return bandA.join('') < bandB.join('') ? -1 : 1;
+});
+
+list.innerHTML = sorted.map(band => `
+  <li>${band}</li>
+`).join('');
 
 
 </script>
