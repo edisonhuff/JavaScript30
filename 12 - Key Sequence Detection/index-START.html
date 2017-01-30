@@ -7,6 +7,15 @@
 </head>
 <body>
 <script>
+  const pressed = [];
+  const code = 'herpderp';
+  window.addEventListener('keyup', ({key}) => {
+    pressed.push(key);
+    pressed.splice(-(code.length) -1, pressed.length - code.length);
+    if(pressed.join('') === code) {
+      cornify_add();
+    }
+  });
 </script>
 </body>
 </html>
